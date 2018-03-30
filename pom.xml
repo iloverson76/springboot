@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.chp</groupId>
-	<artifactId>com.chp.springboot</artifactId>
+	<artifactId>chp-springboot</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<!-- 继承父包,此包会添加依赖,spring用到的核心包 -->
 	<parent>
