@@ -35,7 +35,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableAutoConfiguration
 @MapperScan("com.chp.modules.*.dao.mapper")
-@Api(value = "api",description = "WebController") // Swagger UI 对应api的标题描述
 public class ChpSpringbootApplication  extends SpringBootServletInitializer 
   implements EmbeddedServletContainerCustomizer {
   @Bean
