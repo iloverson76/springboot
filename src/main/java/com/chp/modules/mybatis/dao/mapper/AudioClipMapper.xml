@@ -63,14 +63,14 @@
 		</foreach>
 	</insert>
 
-	<!-- 总记录数 -->
+	<!-- 总记录数  mysql不支持like postgrepSql才支持-->
 	<select id="qryTotalByKey" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
 		select count(1)
 		from
 		bc.bc_audioclip_info WHERE delete_flag=1
 		<if test="searchKey!=null">
-			and AUDIOCLIP_NAME ilike #{searchKey}
+			and AUDIOCLIP_NAME like #{searchKey}
 		</if>
 	</select>
 
@@ -82,7 +82,7 @@
 		from
 		bc.bc_audioclip_info WHERE delete_flag=1
 		<if test="searchKey!=null">
-			and AUDIOCLIP_NAME ilike #{searchKey}
+			and AUDIOCLIP_NAME like #{searchKey}
 		</if>
 		order by CREATE_TIME DESC
 		limit #{pageSize,jdbcType=INTEGER} offset

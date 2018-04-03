@@ -3,6 +3,8 @@ package com.chp.modules.mybatis.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.chp.modules.mybatis.dao.entity.AudioClip;
 
 public interface AudioClipMapper{
@@ -22,6 +24,6 @@ public interface AudioClipMapper{
 
   List<AudioClip> qryByMapParam(Map<String, Object> map);
 
-  int qryTotalByKey(String searchKey);
+  int qryTotalByKey(@Param("searchKey")String searchKey);
   
 }

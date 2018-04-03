@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.chp.comm.exception.BusinessException;
 import com.chp.comm.utils.SqlUtil;
 import com.chp.modules.mybatis.dao.entity.AudioClip;
@@ -54,12 +54,13 @@ public class AudioClipServiceImpl implements AudioClipService {
     pageNo = pageNo > 0 ? pageNo : 1;
     searchKey = SqlUtil.likeAround(searchKey);
     Map<String, Object> map = new HashMap<>();
-    int start = (pageNo - 1) * pageSize;
+    int start = (pageNo - 1) * pageSize;//offset指定要返回的第一行的偏移量:初始行的偏移量是0(不是1)
     map.put("start", start);
     map.put("searchKey", searchKey);
     map.put("pageSize", pageSize);
     // 按条件分页查询
     List<AudioClip> audioClipList = audioClipMapper.qryByMapParam(map);
+    //int total2=audioClipList.size();//这样也可以查询总条数
     // 查询总条数
     int total = audioClipMapper.qryTotalByKey(searchKey);
     // 分页信息封装
@@ -70,7 +71,7 @@ public class AudioClipServiceImpl implements AudioClipService {
     pageInfo.setPageCount(pageCount);
     pageInfo.setAudioClip(audioClipList);
     pageInfo.setTotal(total);
-    logger.info("AudioClip pageInfo: {}" + JSONUtils.toJSONString(pageInfo));
+    logger.info("AudioClip pageInfo: {}" + JSON.toJSONString(pageInfo));
     return pageInfo;
   }
 
