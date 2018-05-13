@@ -5,12 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chp.comm.utils.GsonUtil;
+import com.chp.comm.utils.redis.single.RedisSingleUtils;
 import com.chp.modules.mybatis.dao.entity.UserInfo;
 import com.chp.modules.mybatis.dao.mapper.UserInfoMapper;
-import com.chp.modules.mybatis.service.RedisService;
 
 import io.swagger.annotations.Api;
 
@@ -19,21 +20,16 @@ import io.swagger.annotations.Api;
  * Created by xiaour on 2017/4/19.
  */
 @RestController
-@RequestMapping(value = "/test")
-@Api(value = "api", description = "TestCtrl") // Swagger UI 对应api的标题描述
-public class TestCtrl {
+@RequestMapping(value = "/redis")
+@Api(value = "api", description = "RedisController") // Swagger UI 对应api的标题描述
+public class RedisController {
 
   @Autowired
-  private RedisService redisService;
+  private RedisSingleUtils redisSingleUtils;
 
   @Autowired
   private UserInfoMapper userInfoMapper;
-
-  @RequestMapping(value = "/index", method = RequestMethod.GET)
-  public String index() {
-    return "hello world";
-  }
-
+ 
   /**
    * 向redis存储值
    * 
@@ -43,9 +39,15 @@ public class TestCtrl {
    * @throws Exception
    */
   @RequestMapping(value = "/set", method = RequestMethod.POST)
-  public String set(String key, String value) throws Exception {
-    redisService.set(key, value);
+  public String set(@RequestParam(name = "key")String key, @RequestParam(name = "value")String value) throws Exception {
+	  redisSingleUtils.set(key, value);
     return "success";
+  }
+  
+  
+  @RequestMapping(value = "/index", method = RequestMethod.GET)
+  public String index() {
+    return "hello world";
   }
 
   /**
@@ -55,9 +57,10 @@ public class TestCtrl {
    * @return
    */
   @RequestMapping(value = "/get", method = RequestMethod.GET)
-  public String get(String key) {
+  public String get(@RequestParam(name = "key")String key) {
     try {
-      return redisService.get(key);
+    	String ret=(String) redisSingleUtils.get(key);
+      return ret;
     } catch (Exception e) {
       e.printStackTrace();
     }
