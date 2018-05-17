@@ -15,9 +15,12 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-		<!-- 本地调试要注释 部署上服务器要放开 <dependency> <groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-starter-tomcat</artifactId> <scope>provided</scope> 
-			</dependency> -->
+		<!-- 本地调试要注释 部署上服务器要放开 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -38,11 +41,11 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			</dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -140,9 +143,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		<!-- 本地调试要注释 服务器要放开 <dependency> <groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-starter-tomcat</artifactId> <scope>provided</scope> 
-			</dependency> -->
+		<!-- 本地调试要注释 服务器要放开 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-neo4j</artifactId>
