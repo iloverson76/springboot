@@ -10,6 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chp.modules.websocket.WebSocketLogThread;
@@ -29,6 +30,7 @@ public class WebSocketLogController {
 	 * 新的WebSocket请求开启
 	 */
 	@OnOpen
+	@RequestMapping(value = "/set", method = RequestMethod.POST)
 	public void onOpen(Session session) {
 		try {
 			// 执行tail -f命令
